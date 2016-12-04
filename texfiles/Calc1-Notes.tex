@@ -1,0 +1,306 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} 
+\usepackage{tabularx}
+\usepackage{amsmath}
+ \usepackage{ltablex}
+ \usepackage{enumitem}
+\setlength{\extrarowheight}{8pt}
+
+\title{Calculus I: Possibly Useful Notes and Problems}
+\author{Daniel F. Belin}
+\thanks{The author can be reached by email at \{math at dbelin dot net\}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\section{Introduction}
+I have written these notes as useful accompaniment to, and as hopefully helpful exposition of, the concepts learned during the past semester of introductory Calculus. It is not comprehensive and is certainly not meant to replace the formidable work of Briggs, Lang, Stewart\footnote{Most practice problems have been sourced by the author from Stewart or Lang}, or even of your own notes. My intention here is primarily to present a collection of good problems to practice on--in fact, problems that I would practice on--and to provide insights into heuristics that are useful in comprehending and completing problems in differential and integral calculus quickly. I've done my best to preserve the notation as 
+
+These notes approximately follow the exposition of the class: first investigating limits, the derivative, derivative rules, and linear approximation; then moving on to Fermat's theorem, extrema, continuity, curve sketching, inverse functions, and trigonometric inverses; and finally finishing with a section on integral calculus. I've done my best to make sure that everything is accurate and neat, but I can't make guarantees about the contents of this document: I'm a student myself! Therefore, I strongly advise you to go through the corresponding sections of your textbooks and see the authors' explanations for the concepts I discuss. Good luck!
+
+\section{Summary of Useful Rules}
+
+The following list represents a summary of some useful items from this semester's class. Please don't study these from the table alone, it is better to go back and try and understand them at the level of exposition of the book. For many of these, problems and notes follow later in this document. When working on exercises, it's a good idea to try and refer to these properties as little as possible.
+\begin{center}
+\begin{tabularx}{\textwidth}{ X l }
+	\\ Trigonometric Identities\\ \hline
+	$\sin^2(\theta) = 1 - cos^2(\theta)$ & Pythagorean identity of sine \\
+	$\cos^2(\theta) = 1 - sin^2(\theta)$ & Pythagorean identity of cosine \\
+	$\sin(a + b) = \sin(a)\cos(b) + \cos(a)\sin(b)$ & Sine addition \\
+	$\cos(a + b) = \cos(a)\cos(b) - \sin(a)\sin(b)$ & Cosine addition \\
+	\\Limit Rules (Assume limits exist herein)\\ \hline
+	$\lim_{h \to 0}[f(h) + g(h)] = \lim_{h \to 0}f(h) + \lim_{h \to 0}g(h)$ & Sum rule for limits \\
+	$\lim_{h \to 0}[f(h) \cdot g(h)] = \lim_{h \to 0}f(h) \cdot \lim_{h \to 0}g(h)$ & Product rule for limits \\
+	$\lim_{h \to 0}c f(h) = c \lim_{h \to 0}f(h)$ & Limit constant multiplication \\
+	$\lim_{h \to 0}[\frac{f(h)}{g(h)}] = \frac{\lim_{h \to 0}f(h)}{\lim_{h \to 0}g(h)}$ & Quotient rule for limits \\
+	if $g(h) \leq f(h)$, then $\lim_{h \to 0}g(h) \leq \lim_{h \to 0}f(h)$ & Limit inequality \\
+	if $g(h) \leq m(h) \leq f(h)$ and \newline $\lim_{h \to 0}f(h) = \lim_{h \to 0}g(h)$, then \newline $lim_{h \to 0}m(h) = \lim_{h \to 0}f(h) = \lim_{h \to 0}g(h)$ & Squeeze theorem \\
+	$\lim_{h \to 0}\frac{\sin h}{h} = 1$ & Limit property of sine \\
+	$\lim_{h \to 0}\frac{\cos(h) - 1}{h} = 0$ & Limit property of cosine \\
+	\\Derivative Properties\\ \hline
+	$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$ & Definition of a derivative \\
+	if $f(x) = x^n$ \& $x > 0$, $f'(x) = nx^{n-1}$ & Power rule for derivatives \\
+	For any $f(x)$, $(cf)'(x) = c\cdot f'(x)$ & Constant multiplication \\
+	$(f + g)'(x) = f'(x) + g'(x)$ & Derivative sum rule \\
+	$(f \cdot g)'(x) = f'(x)g(x) + f(x)g'(x)$ & Derivative product rule \\
+	$\frac{f(x)}{g(x)} = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}$ & Derivative quotient rule \\
+	$(f(g(x))'(x) = f'(g(x))g'(x)$ & Derivative chain rule \\
+	$\frac{d}{dx}[\sin(x)] = \cos(x)$ & Derivative of sine \\
+	$\frac{d}{dx}[\cos(x)] = -\sin(x)$ & Derivative of cosine \\
+	$\frac{d}{dx}[\tan(x)] = \sec^2(x)$ & Derivative of tangent\\
+	$\frac{d}{dx}[\sec(x)] = \tan(x)\sec(x)$ & Derivative of secant\\
+	$\frac{d}{dx}[\csc(x)] = -\cot(x)\csc(x)$ & Derivative of cosecant\\
+	$\frac{d}{dx}[\cot(x)] = -\csc^2(x)$ & Derivative of cotangent\\
+	$\frac{d}{dx}[e^x] = e^x$ & Derivative of $e^x$\\
+	$\frac{d}{dx}[\ln(x)] = \frac{1}{x}$ & Derivative of $ln(x)$\\
+	$\frac{d}{dx}[\arcsin(x)] = \frac{1}{\sqrt{1 - x^2}}$\\
+	$\frac{d}{dx}[\arccos(x)] = \frac{-1}{\sqrt{1 - x^2}}$\\
+	$\frac{d}{dx}[\arctan(x)] = \frac{1}{1 + x^2}$\\
+	$a > 0, \frac{d}{dx}[a^x] = e^{x\ln(a)}\ln(a)$ & Derivative of $a^x$\\
+	\\Integral Properties\\ \hline
+	$\int x^n dx = \frac{x^{n+1}}{n+1} + C$ & Power rule for integrals\\
+	$\int \frac{1}{x} dx = \ln(x) + C$ & Integral of inverse function\\
+	$\int e^x dx = e^x + C$ & Integral of exponential function\\
+	$\int \sin(x) dx = -\cos(x) $ & Integral of sine\\
+	$\int \cos(x) dx = \sin(x) $ & Integral of cosine\\
+	$\int \frac{1}{1 + x^2} dx = \arctan(x) $ & Integral of $\frac{1}{1 + x^2}$ \\
+\end{tabularx}
+\end{center}
+\section{Derivatives}
+
+In order to build stronger understanding of derivatives, it is perhaps useful to go back and prove some of the derivative properties. I'd recommend trying to prove the properties of the derivative (sum, product, quotient), or at least investigate what the book has to say about these. Additionally, it's probably useful to try and practice with derivatives of various types of functions, in order to try and tie them back to the original definition of a derivative.
+
+Once you're comfortable with the rules, the important thing to try and build an intuition for is where rules can be applied. Always try to simplify something algebraically first and get it into a form where you can obviously apply the derivative properties you know. Look for ways to change a function into an equivalent statement which you can derive. That being said, you can always end up in a situation where the derivative turns out to be counterintuitive or beyond you. In these cases, it might be worth it to resort to the limit definition of a derivative. Again, even in this case, try to break down the function using algebra derivative properties into multiple derivatives, so as to only have to do arduous work when you have to.
+
+A few notes on notation: remember to be careful about mixing it. The first form looks like this:
+
+(1) $$f(x) = x^2, f'(x) = 2x$$
+
+What this is really doing is creating an object $f$, and assigning the value of $f$ at $x$ to $x^2$. Another way to write this would be:
+
+(2) $$y = x^2, \frac{dy}{dx} = 2x$$
+
+Since $y$ at $x$ will be equivalent to $f(x)$, there's no reason you can't write something like:
+
+(3) $$f(x) = x^2, \frac{df}{dx} = 2x$$
+
+You'll see forms like this in the Lang text occasionally. 
+
+The final form is operator notation. You are already familiar with operator notation (for instance, $\sin(x)$ would be an operator of the same sort), so don't let it perturb you. It takes the form:
+
+(4) $$\frac{d}{dx}[ \sin(x) ] = \cos(x)$$
+
+Which is really the same as if you were to write:
+
+(5) $$\text{Given } y = \sin(x),$$
+$$\frac{d}{dx}[y] = \cos(x)$$
+
+This operator is, in fact, associative. This means that you can write (5) in the form of (2), that is, given $y$ as in (5):
+
+(6) $$\frac{d}{dx}[y] = \frac{dy}{dx} = \cos(x)$$
+
+All these forms are connected. What is important is that you understand the underlying relationship between them and don't haphazardly mix them. Know what each of them does, and why!
+
+\subsection{Newtonian Estimation}
+
+What Newton's method allows you to do is iteratively (that is, by repeating the process over and over) estimate a function $f$'s root ($r$, $f(r) = 0$) from an arbitrary $x_1$. This is useful in cases where the root is a real number, but is not an integer. In order to find a Newtonian estimate for a root, the following process is observed.
+
+First, a value $x_1$ is found near the root of interest for $f$. Then, $x_1$ is plugged into:
+
+(7) $$ x_2 = x_1 - \frac{f(x_1)}{f'(x_1)}$$
+
+The value of $x_2$ will be closer to $r$ than $x_1$ was. You can now repeat this process to find $x_3$, use $x_3$ to find $x_4$, and so on by plugging each one into the following general form of Newton's method:
+
+(8) $$ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
+
+The larger $n$ gets--essentially, the more you repeat this process--the closer you get to $r$. 
+
+The extension of this is as follows: you can find any value (let's call it $a$) by defining it as the root of a function $f$. You should be able to do this algebraically. Now that a is a root, you should be able to estimate it using Newton's method as detailed above.
+
+\subsection{Multiple Derivatives}
+
+Remember that you can take the derivative of a derivative, which can be useful for a number of physical applications (think about velocity and acceleration), and becomes exceptionally important when you come to learn about the Taylor series in a later calculus courses. The typical notation for a second derivative can be written as $f''(x)$ for a function $f$, or if you set $y = f(x)$, as $\frac{d^2y}{dx^2}$. Actually, if you want to improve your notation chops, use operator notation to figure out why that is written in that way. This is left as an exercise for the reader (I've always wanted to write that!).
+
+By deriving again, you get the third derivative, and so on. If it becomes too unwieldy and you don't want to put more ticks in function notation, there is another way to write it (which I tend to prefer): $f^{(n)}(x)$ is the notation for the $n$-th derivative of $f(x)$.
+
+\subsection{Rates of Change}
+
+Rates of change are essentially an extension of the concept of implicit differentiation. The idea is simple: if you have a known rate of change and an unknown rate of chance, related by a shared differential, and a function relating the two rates of change together, you can find the relationship between them. Essentially, given that you can relate the changing variables to each other, you can find an unknown rate of change from a known rate of change.
+
+\subsection{Problem Set \#1} Derivatives and some limits\footnote{This section has less exercises because of the existence of the problem set for derivatives on BlackBoard}.
+
+Find the limits:
+\begin{enumerate}
+\item $lim_{x \to 1} e^{x^3-x}$
+\item $lim_{h \to 0} \frac{(h-1)^3 + 1}{h}$
+\item $lim_{x \to -\pi} \ln(\sin x)$ \\
+\end{enumerate}
+Derivative problems (for problem 4, use definition of the derivative):
+\begin{enumerate}[resume]
+\item Prove the power rule for derivatives from the definition of a derivative
+\item Prove the product rule for derivatives from the definition of a derivative
+\item Find derivative of $f(x) = \sqrt{3 - 5x}$
+\item Find derivative of $k(x) = e^x\ln(x^3 - x)$
+\item Find derivative of $y = \sqrt{\arctan(x)}$
+\item Find derivative of $P = \tan(\frac{m}{1 + m^2})$
+\item The mass of part of a wire is $x(1 + \sqrt{x})$ kilograms, where $x$ is measured in meters from one end of the wire. Find the linear density (mass / length) when $x = 4\text{m}$.
+\item Approximate the value of the square root of 5 using Newton's method. 
+\end{enumerate}
+
+\section{Applications of Differentiation}
+
+In the second section of Calculus I, several useful implications of differentiation were explored. These included Fermat's theorem, the mean value theorem, extrema, limits to infinity, and inverse functions. Additionally, many of these concepts are put together to sketch the graphs of functions. 
+
+The first important concept is that of continuity. A function $f(x)$ is continuous on the interval $[a,b]$ if $f(x)$ is defined and $\lim_{h \to 0} f(x+h) = f(x)$ for all $x, a<x<b$. Essentially, this means intuitively that a function is "smooth" (informally) with no holes on the interval. It should be clear from this definition that if a function is not continuous, it is not differentiable.
+
+If a function $f$ is defined and differentiable on an open interval $a < x < b$ (remember that you can't find the derivative at $f(a)$ and $f(b)$ as you cannot find the limit from both directions), there are several useful resulting principles. First, you can find the local extrema (that is, minimum and maximum) of a given function on the interval. The extrema, will exist at critical points in the domain (usually called $c$) where the derivative $f'(c) = 0$. Once you know where the critical points are on the interval you care about, you probably want to find out if they are maxima or minima, and whether they are the maxima and minima for the whole interval or only for a subset of the interval (we'll call it $a_1 < x < b_1$, where $a < a_1 < x < b_1 < b$). Whether an extremum is a minimum or maximum can be found by sampling around the extremum, that is:
+
+\begin{enumerate}
+\item Iff values near the extremum of $f$ at $c$ are less than $f(c)$--that is $f(c \pm \epsilon) < f(c)$ (where $\epsilon$ is some small offset)--then $c$ is a maximum of $f$.
+\item Iff values near the the extremum $f$ at $c$ are greater than $f(c)$--that is $f(c \pm \epsilon) > f(c)$ (where $\epsilon$ is some small offset)--then $c$ is a minimum of $f$.
+\end{enumerate}
+
+Another (potentially speedier) way one can usually find whether a critical point is a minimum or maximum is the second derivative test. It is stated as follows:
+
+Given a function $f$ with a critical point on an interval $a < x < b$, called $c$, where $f'(c) = 0$. If it exists, one can use the second derivative $f^{(2)}(c)$ to determine whether it is a minimum or a maximum:
+
+\begin{enumerate}
+\item If $f^{(2)}(c) < 0$, then $c$ is a local maximum of $f$.
+\item If $f^{(2)}(c) > 0$, then $c$ is a local minimum of $f$.
+\item IMPORTANT: If $f^{(2)}(c) = 0$, this test is NOT conclusive. Use another method.
+\end{enumerate}
+
+
+I think the intuition for this is pretty clear, and you can prove it using the definition of a derivative. This is left as an exercise for the reader (note that you must prove both cases separately). Think about what sampling is described as doing in the list above. Don't use it unless you've proved it and understand why it works!
+
+Finding whether a critical point of $f$ at a particular critical point $c_1$ (we use a subscript here as there might be multiple extrema) is the maximum or minimum on the whole interval $a < x < b$ is not too bad. If $f(c_1)$ is greater than the values of $f$ at all other extrema on the interval, $f(a)$, and $f(b)$, it is the maximum on the interval. Conversely, if it is less than all other extrema on the interval, $f(a)$, and $f(b)$, it is the minimum on the interval. 
+
+As an exercise, make sure you're comfortable with figuring out exactly how to find the interval on which a critical point is a local extremum. 
+
+\subsection{The Mean Value Theorem}
+
+The Mean Value Theorem states that for a function $f$, which is continuous interval $a \leq x \leq b$ and differentiable on $a < x < b$, there is a point $c$ such that:
+
+(9) $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+
+Notice that the second half of this equation is the slope of the line formed on between $(a, f(a)), and (b, f(b))$. How do you actually find the point $c$? First, find the derivative of $f(x)$, then, plug in your values for $f(b), f(a), b, \text{and} a$ into the right side of (9) to get some value (let's call it $A$). Then solve for $f'(c) = A$ algebraically.
+
+\subsection{Limits at Infinity}
+{\it Note:} I've put my brief notes on L'Hopital's rule here, somewhat out of sequence of the course, so we can have the story of limits in one place.
+
+Limits to infinity can also be described as the end behavior of a function, or more plainly, what happens as a function gets arbitrarily larger and larger, or smaller and smaller. With polynomials, there is a very important question that one must remember, which is that given a polynomial (remember, polynomials generally take the form $f(x) = a_{n}x^n + a_{n-1}x^{n-1} + \dots + a_{1}x^1 + a_0$), what determines the behavior of the overall polynomial? Let's look at an example with $n=5$.
+
+(10) 	$$\text{Given} f(x) = -x^5 + 4x^3 + x^2 + 1, \text{find} \lim_{x \to \infty} f(x).$$
+	$$\lim_{x \to \infty} -x^5 + 4x^3 + x^2 + 1 = \lim_{x \to \infty} -x^5(1 - \frac{4}{x^2} - \frac{-1}{x^3} - \frac{1}{x^5}) = \lim_{x \to \infty}(-x^5) - 0$$
+
+From this, you can see that as $x$ grows infinitely large, the limit of $f(x)$ can be found from analysis of the first term. It is important to develop useful generalized heuristics for finding what the first term means. This is one of the exercises for this section and it is highly recommended that you commit the results of the exercise to memory.
+
+For fractions with polynomial numerators and denominator, use algebra to put them into a determinate form. Again, it's useful to try and identify the pattern of behavior of polynomial fractions with different numerators and denominators here and memorize it (and I tend to think the best way to memorize something is to go through the story of why the pattern is the way it is). 
+
+A quick reminder that the indeterminate forms of a limit we care about in this case are $\frac{\pm\infty}{\pm\infty}$ and $\frac{0}{0}$. There are other indeterminate forms, but they can be transformed into these two (try to find one and figure out how): in the case where you cannot algebraically get to a determinate form, it's time for a new derivative-based tool, L'Hopital's rule.
+
+\subsection{L'Hopital's Rule}
+
+L'Hopital's rule is useful for when you have a limit of a fraction of two functions $\frac{f(x)}{g(x)}$ in indeterminate form which you cannot algebraically reduce to a determinate form. If $\lim_{x \to c}\frac{f(x)}{g(x)}$ is indeterminate (see definition in last section), you are allowed to use this rule (however, it is very important that it be indeterminate):
+
+(11) $$\lim_{x \to c}\frac{f(x)}{g(x)} = \lim_{x \to c}\frac{f'(x)}{g'(x)}$$
+
+Note that if this limit is also indeterminate, you can apply L'Hopital's rule again. However, always try, at each stage, to simplify algebraically into a determinate form.
+
+L'Hopital's rule also has a fantastic application in comparing rates of growth of functions. If you are interested in if whether one function grows at a faster rate than another as it becomes infinitely large, then the following rules apply as you take the limit of $\frac{f(x)}{g(x)}$.
+
+\begin{enumerate}
+\item If $\lim_{x \to \infty}\frac{f(x)}{g(x)} = \infty$, then $f(x)$ grows at a faster rate than $g(x)$
+\item If $\lim_{x \to \infty}\frac{f(x)}{g(x)} = 0$, then $g(x)$ grows at a faster rate than $f(x)$
+\item If $\lim_{x \to \infty}\frac{f(x)}{g(x)} = C$, where $C$ is a constant and $C \neq 0$, the growth rate is the same
+\end{enumerate}
+
+\subsection{Inverse Functions}
+
+An inverse function is a function that exists for functions that have a certain property on an interval known as "bijection" (also called one-to-one correspondence), which means that it is both surjective and injective. In common terms, this means that for a function $f$ to be bijective, all parts of the range, that is, all possible values for $f(x)$, must have a corresponding $x$ (this is an informal statement of a surjection); and that all values of $f(x)$ must only have one $x$ which creates them (this is an injection). 
+
+This has a somewhat more intricate meaning than we need. For us, it's really enough to say that for a function to have an inverse, it must pass the "horizontal line test" if $f(x)$ on interval for which we are trying to define the inverse is graphed; or even better, that for an inverse to exist on an interval, the function must be either strictly increasing or decreasing on that interval.
+
+The statement of an inverse function, given that the above caveat is true for a function, is the following:
+
+(12) $$ y = f(x) \iff x = g(y) $$
+
+Where $g(y)$ is the inverse function. This is a logical statement ($\iff$ means "if and only if") that says the same thing as $g(f(x)) = x$, for all $x$. Stated once more, it means that given some $y$, we can find the $x$ for which the $f(x) = y$ by taking $g(y)$. In all these examples, $g$ is what we call the 'inverse function'.
+
+The derivative of an inverse function is $g'(y) = \frac{1}{f'(x)}$. Be very careful about the variables here and remember what y is from the definition above!
+
+The strategy for defining the derivative in one variable (say y) is essentially as follows (it was done in class for arcsine, arccos, and arctan). First, you set up the derivative of an inverse function as defined above. Then you use the definition of $y$ in terms of $f(x)$ (see (12)) to try and find a way to substitute $y$ for $x$ in the denominator of the inverse derivative. Then you have a function that is defined strictly in terms of one variable (y), which is what you want.
+
+\subsection{Curve Sketching}
+
+Curve sketching is where you put a lot of what you've done in this chapter together in order to sketch out curves which you couldn't before. The key is to follow the procedure closely and CHECK YOUR WORK at every possible stage. Errors early on will snowball into further errors later on. The general procedure for sketching curves is:
+
+\begin{enumerate}
+\item Intersections with the x and y axis
+\item Critical points
+\item Regions of increase
+\item Regions of decrease
+\item Maxima and minima (including local ones)
+\item Behavior as $x$ becomes very large and small
+\item Vertical asymptotes
+\end{enumerate}
+
+\subsection{Problem Set \#2}  For Section 4.
+
+Fermat's theorem, minima, and maxima:
+\begin{enumerate}
+\item Find the extrema for $f(x) = x^3 - 6x^2 + 9x + 1 \text{on the interval} [2. 4]$. Identify as maxima or minima.
+\item Find the extrema for $f(x) = \frac{3x - 4}{x^2 + 1} \text{on the interval} [-2, 2]$. Identify as maxima or minima.
+\item Find the extrema for $f(x) = x + 2 \cos(x) \text{on the interval} [-\pi, \pi]$. Identify as maxima or minima.
+\item Find the extrema for $f(x) = \ln(x^2 + x + 1) \text{on the interval} [-1, 1]$. Identify as maxima or minima.
+\item Find the critical points for $f(x) = x^2e^{-3x}$. Identify any absolute maxima or minima, and if not, identify local maxima or minima and intervals for which they are such.
+\item Find the critical points for $f(x) = \frac{x - 1}{x^2 - x + 1}$. Identify any absolute maxima or minima, and if not, identify local maxima or minima and intervals for which they are such.
+\item Find the critical points for $f(\theta) = 2 \cos(\theta) + \sin^2(\theta)$. Identify any absolute maxima or minima, and if not, identify local maxima or minima and intervals for which they are such. \\
+\item $*$ A canister is dropped from a helicopter 500m above the ground. Its parachute does not open, but the canister has been designed to withstand an impact velocity of 100m/s. Will it burst? (Remember gravitational acceleration $\approx 9.8 \frac{m}{s^2}$)
+\end{enumerate}
+Mean Value Theorem
+\begin{enumerate}[resume]
+\item Find all $c$ that satisfy MVT on the interval $[0, 2]$ for $f(x) = 2x^2 - 3x + 1$ or determine that MVT cannot be applied
+\item Find all $c$ that satisfy MVT on the interval $[1, 4]$ for $f(x) = ln(x)$ or determine that MVT cannot be applied
+\item Find all $c$ that satisfy MVT on the interval $[-1, 2]$ for $f(x) = (x - 1)^3$ or determine that MVT cannot be applied
+\item Find all $c$ that satisfy MVT on the interval $[-1, 3]$ for $f(x) = x^3$ or determine that MVT cannot be applied
+\item Find all $c$ that satisfy MVT on the interval $[0, 2]$ for $f(x) = x^2 + 5x$ or determine that MVT cannot be applied \\
+\end{enumerate}
+Increasing versus decreasing:
+\begin{enumerate}[resume]
+\item Find the intervals on which $f(x) = x^3 -12x + 2$ is increasing and decreasing
+\item Find the intervals on which $f(x) = (x + 1)^5 - 5x -2$ is increasing and decreasing
+\item Find the intervals on which $f(x) = x\sqrt{6 - x}$ is increasing and decreasing
+\item Find the intervals on which $f(x) = \sin(x) + \cos(x)$ is increasing and decreasing
+\end{enumerate}
+Infinite Limits and L'Hopital's Rule:
+\begin{enumerate}[resume]
+\item Find the general rule for how a polynomial $f(x) = a_{n}x^n + a_{n-1}x^{n-1} + \dots + a_{1}x^1 + a_0$ behaves as $x \to \pm\infty$. Read the notes, there are eight cases based on the first term. \underline{It's useful to have this memorized.}
+\item Find the general rule for how polynomial fractions of the form $f(x) = \frac{a_{j}x^j + a_{j-1}x^{j-1} + \dots + a_{1}x^1 + a_0}{a_{k}x^k + a_{k-1}x^{k-1} + \dots + a_{1}x^1 + a_0}$ should look as $x \to \pm\infty$. Some of the general cases don't give a final answer but will help check it. \underline{It's useful to have this memorized.}
+\item Find $lim_{x \to \infty}\frac{2x^4 - 1}{-4x^4 + x^2}$ Also find for $x \to -\infty$.
+\item Find $lim_{x \to -\infty}(x^2 - x^3)e^2x$
+\item Find $lim_{x \to \infty}\frac{e^4x - 1 - 4x}{x^2}$
+\item Find $lim_{x \to \infty}\frac{5x^4 - x^3 + 3x + 2}{x^3 - 1}$ Also find for $x \to -\infty$.
+\item Find $lim_{x \to \infty}-3x^6 + x^3 + 1$ Also find for $x \to -\infty$.
+\end{enumerate}
+Curve Sketching:
+\begin{enumerate}[resume]
+\item Sketch $y = x^6 + 6x$
+\item Sketch $y = \frac{2x - 3}{3x + 1}$
+\item Sketch $y = \frac{\sin(x)}{1 + \cos(x)}$
+\item Sketch $y = x^4 - 4x$ \\
+\end{enumerate}
+Inverse Functions:
+\begin{enumerate}[resume]
+\item Show the derivative of $\arcsin(x)$
+\item Show the derivative of $\arccos(x)$
+\item Show the derivative of $\arctan(x)$
+\end{enumerate}
+
+\section{Integral Calculus}
+
+This section is going to brief, essentially intended to supplement and maybe rephrase some key points from the texts. The basic point here is that it's probably best to go back and try and understand any place where you don't get the story. Try to understand the whys of the FTC. !TODO!
+
+\end{document}
